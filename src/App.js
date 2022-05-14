@@ -26,7 +26,7 @@ const rotation = keyframes`
 const Box = styled.div`
 width: 100px;
 height: 100px;
-background-color: teal;
+background-color: ${(props) => props.bgColor};
 display: flex;
 justify-content: center;
 align-items: center;
@@ -48,7 +48,7 @@ span{
 function App() {
   return (
     <Wrapper>
-      <Box>
+      <Box bgColor="tomato">
         <Emoji as="span">😊</Emoji>
       </Box>
     </Wrapper>
