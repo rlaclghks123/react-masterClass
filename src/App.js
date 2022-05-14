@@ -1,5 +1,5 @@
 
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const Wrapper = styled.div`
 display:flex;`;
@@ -11,6 +11,18 @@ font-size: 50px;
 }
 `;
 
+const rotation = keyframes`
+0%{
+  transform: rotate(0deg);
+}
+50%{
+  transform: rotate(360deg);
+}
+100%{
+  transform: rotate(0deg);
+}
+`
+
 const Box = styled.div`
 width: 100px;
 height: 100px;
@@ -18,6 +30,7 @@ background-color: teal;
 display: flex;
 justify-content: center;
 align-items: center;
+animation: ${rotation} 5s linear infinite;
 
 ${Emoji}{
   font-size: 10px;
