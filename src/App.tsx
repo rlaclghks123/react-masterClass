@@ -58,6 +58,7 @@ font-family: 'Source Sans Pro', sans-serif;
 }
 a{
   text-decoration: none;
+  color:inherit;
 }
 `;
 
