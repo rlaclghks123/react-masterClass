@@ -25,6 +25,7 @@ const Loader = styled.div`
     font-size: 40px;
     display: flex;
     justify-content: center;
+    color:black;
     `;
 
 interface RouteParams {
