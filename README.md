@@ -19,3 +19,9 @@
       2. 컴포넌트에서 인자를 사용해준다.. ex) const Box = styled `background-color: ${(props)=>props.bgColor}`;
       이때 주의할점은 props를 줄때 이름과, 사용할때 이름이 같아야 한다.
 
+- [x] Style-Components-override  
+
+      - 부모 style컴포넌트 에서 override해서 사용할 수 도 있다. 
+      사용방법  
+      1. 부모 style컴포넌트를 받아와서 추가 style 해준다.. ex) (부모컴포넌트)const Parents = styled.div`width:100px`;  const child = style(Parents)`height:100px`;  
+
