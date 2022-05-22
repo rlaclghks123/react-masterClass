@@ -39,3 +39,11 @@
       사용방법  
       1. 컴포넌트에 styled.html요소.attrs({atrribute})`css코드`;를 통해 컴포넌트를 만들어준뒤, 원하는곳에  필요한만큼 사용한다.
       ex) const Input = styled.input.attrs({required:true})`background-color:teal;`    생성한뒤, => <Input / ><Input / ><Input / >  와 같이 필요한만큼 사용해준다.
+
+- [x] Style-Components-animation 
+
+      - style-component를 통해 animation을 사용할수있다.
+      사용방법  
+      1. keyframes를 Import 한다. import {keyframes} from "styled-components";
+      2. animation style component를 만들어준다. 기본형태 : const A = keyframes`css코드`; ex) const rotation = keyframes`from{...} to{...}`;
+      3. animation을 사용해준다. 기본형태 : ${animation이름}  ex) animation : ${rotation} 1s linear 
