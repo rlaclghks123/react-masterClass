@@ -32,3 +32,10 @@
       1. 컴포넌트에 as="html 테그" 를 통해 설정해준다.. 
       ex) 기존 style 컴포넌트 const Box = styled.div`width:100px;`;   
       as사용 => <Box as="span">  ==> div가 아닌 span으로 작동된다.
+
+- [x] Style-Components-Attrs  
+
+      - 여러 컴포넌트에 공통의 attribute를 작성해줄 수 있다.
+      사용방법  
+      1. 컴포넌트에 styled.html요소.attrs({atrribute})`css코드`;를 통해 컴포넌트를 만들어준뒤, 원하는곳에  필요한만큼 사용한다.
+      ex) const Input = styled.input.attrs({required:true})`background-color:teal;`    생성한뒤, => <Input / ><Input / ><Input / >  와 같이 필요한만큼 사용해준다.
