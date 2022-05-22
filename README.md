@@ -25,3 +25,10 @@
       사용방법  
       1. 부모 style컴포넌트를 받아와서 추가 style 해준다.. ex) (부모컴포넌트)const Parents = styled.div`width:100px`;  const child = style(Parents)`height:100px`;  
 
+- [x] Style-Components-As  
+
+      - style은 유지하되, html 테그를 변경할때 사용한다.
+      사용방법  
+      1. 컴포넌트에 as="html 테그" 를 통해 설정해준다.. 
+      ex) 기존 style 컴포넌트 const Box = styled.div`width:100px;`;   
+      as사용 => <Box as="span">  ==> div가 아닌 span으로 작동된다.
