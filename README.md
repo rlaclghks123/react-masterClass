@@ -44,6 +44,15 @@
 
       - style-component를 통해 animation을 사용할수있다.
       사용방법  
-      1. keyframes를 Import 한다. import {keyframes} from "styled-components";
+      1. keyframes를 Import 한다. ex) import {keyframes} from "styled-components";
       2. animation style component를 만들어준다. 기본형태 : const A = keyframes`css코드`; ex) const rotation = keyframes`from{...} to{...}`;
       3. animation을 사용해준다. 기본형태 : ${animation이름}  ex) animation : ${rotation} 1s linear 
+
+- [x] Style-Components-Theme 
+
+      - 모든색상을 가지고 있는 오브젝트 이다.
+      사용방법  
+      1. ThemeProvider를 import 한다. ex) import {ThemeProvider} from "style-components";
+      2. 사용할 컴포넌트를 ThemeProvider컴포넌트로 감싸준다. ex) <ThemeProvider><App /><ThemeProvider>
+      3. ThemeProvider에 theme={} 을 통해 사용해준다. ex) <ThemeProvider theme={}>
+      4. style component를 만들어 사용해준다. ex) <ThemeProvider theme={Box}>
