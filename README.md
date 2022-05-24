@@ -55,4 +55,5 @@
       1. ThemeProvider를 import 한다. ex) import {ThemeProvider} from "style-components";
       2. 사용할 컴포넌트를 ThemeProvider컴포넌트로 감싸준다. ex) <ThemeProvider><App /><ThemeProvider>
       3. ThemeProvider에 theme={} 을 통해 사용해준다. ex) <ThemeProvider theme={}>
-      4. style component를 만들어 사용해준다. ex) <ThemeProvider theme={Box}>
+      4. 사용하길 원하는 style component를 만들어 사용해준다 theme={} 넣어서 사용해준다. . ex) <ThemeProvider theme={Box}>
+
