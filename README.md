@@ -56,4 +56,11 @@
       2. 사용할 컴포넌트를 ThemeProvider컴포넌트로 감싸준다. ex) <ThemeProvider><App /><ThemeProvider>
       3. ThemeProvider에 theme={} 을 통해 사용해준다. ex) <ThemeProvider theme={}>
       4. 사용하길 원하는 style component를 만들어 사용해준다 theme={} 넣어서 사용해준다. . ex) <ThemeProvider theme={Box}>
+<hr>
+<br>
 
+## Typescript
+
+- [x] Typescript
+ 
+      - Typescript란 자바스크립트를 기반으로 한 Strongly-typed 언어로 프로그래밍 언어가 작동하기 전에 type을 확인하여 미리 오류를 방지한다. 
