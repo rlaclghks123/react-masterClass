@@ -61,6 +61,31 @@
 
 ## Typescript
 
-- [x] Typescript
+- [x] Typescript란
  
-      - Typescript란 자바스크립트를 기반으로 한 Strongly-typed 언어로 프로그래밍 언어가 작동하기 전에 type을 확인하여 미리 오류를 방지한다. 
+      - Typescript란 자바스크립트를 기반으로 한 Strongly-typed 언어로 프로그래밍 언어가 작동하기 전에 type을 확인하여 미리 오류를 방지한다. 즉 개발자 입장에서 좀 더 안전하게 코딩을 할 수 있다.
+
+      - propTypes와 TypeScript의 차이점 :  오류가 있을경우 propTypes는 코드 실행 후에 알려주고,  TypeScript는 코드 실행 전에 알려준다.
+
+- [x] interface
+
+      - interface : Object Shape(객체모양)을 TypeScript에게 설명해주는 TypeScript의 개념. 즉 Type을 지정한다.
+
+      - 사용방법  
+      기본형태:  interface interface이름 {object shape을 설명}. interface의 이름은 주로 Props를 붙혀서 이름 짓는다. Ex) CircleProps  
+      Ex) interface CircleProps{bgColor:string;}
+
+- [x] Default props vs Optional props 차이점 
+
+      -  Default props는 모든 요소를 required 하고 있는 반면, Optional props는 required요소를 없애줄 수 있다.
+      
+      - Optionanl props 사용방법 : interface요소에 ? 만 붙혀주면 된다. Ex) interface CircleProps{bgColor?:string;}
+
+      - 만약 기존 컴포넌트에서 Optional props를 통해 required가 아닌 props를 style 컴포넌트에서 받는경우 경고가 발생한다. Why? 1개의 props만 받기 때문이다.(required가 아니라서).  이경우 style컴포넌트에선 ??를 통해 props를 지정해준다. ex) return <Container bgColor="teal" borderColor={borderColor ?? "white" }/>
+
+- [x] State
+
+      - TypeScript에서는 초기값을 통해 type을 알고, 초기값과 다른 Type일 경우 Error가 발생한다. 
+      대부분의 경우, 초기값과 같은 Type을 유지하며 사용하지만, 만약 Type이 달라질 경우를 대비하여 알아두면 좋다.
+
+      -Type이 초기값과 달라질경우 :  const [value, setValue] = useState<number | string>() 이런식으로 사용 하면된다.  
