@@ -34,7 +34,7 @@ a{
 }
 &:hover{
     a{
-        transition: color 0.2s ease-in;
+        transition: color 0.3s ease-in;
         color:${props => props.theme.accentColor};
     }
 }
@@ -68,31 +68,33 @@ function Coins() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        (
-            async () => {
-                const response = await fetch("https://api.coinpaprika.com/v1/coins");
-                const json = await response.json();
-                setCoins(json.slice(0, 100));
-                setLoading(false);
-            }
+        (async () => {
+            const response = await (fetch("https://api.coinpaprika.com/v1/coins"));
+            const json = await response.json();
+            setCoins(json.slice(0, 100));
+            setLoading(false);
+        }
         )();
     }, []);
+
     return (
         <Container>
             <Header>
                 <Title> 코인</ Title>
             </Header>
-            {loading ? <Loader>Loading...</Loader> : <CoinList>
-                {coins.map((coin) =>
-                    <Coin key={coin.id}>
-                        <Link to={{
-                            pathname: `/${coin.id}`,
-                            state: { name: coin.name }
-                        }}>
-                            <Img src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`} alt="/" />
-                            {coin.name} &rarr; </Link>
-                    </Coin>)}
-            </CoinList>}
+            {loading ? <Loader>Loading...</Loader> :
+                <CoinList>
+                    {coins.map((coin) =>
+                        <Coin key={coin.id}>
+                            <Link to={{
+                                pathname: `/${coin.id}`,
+                                state: { name: coin.name }
+                            }}>
+                                <Img src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`} alt="/" />
+                                {coin.name} &rarr;
+                            </Link>
+                        </Coin>)}
+                </CoinList>}
         </Container>
     );
 }

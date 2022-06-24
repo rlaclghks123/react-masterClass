@@ -89,3 +89,7 @@
       대부분의 경우, 초기값과 같은 Type을 유지하며 사용하지만, 만약 Type이 달라질 경우를 대비하여 알아두면 좋다.
 
       -Type이 초기값과 달라질경우 :  const [value, setValue] = useState<number | string>() 이런식으로 사용 하면된다.  
+
+- [x] Event
+
+      - TypeScript에서 event 사용시 type지정은     
