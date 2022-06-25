@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router";
 import styled from "styled-components";
-
-
+import { Switch, Route, useRouteMatch } from "react-router-dom";
+import Chart from "./Chart";
+import Price from "./Price";
+import { Link } from "react-router-dom";
 //style component
 const Title = styled.h1`
     color:${(props) => props.theme.accentColor};
@@ -54,6 +56,32 @@ const OverviewItem = styled.div`
 
 const Description = styled.p`
     margin: 20px 0px`;
+
+
+const Taps = styled.div`
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 25px 0px;
+    gap:10px;
+`;
+
+
+const Tap = styled.span`
+text-align: center;
+text-transform: uppercase;
+background-color: white;
+padding: 7px 0px;
+font-size: 12px;
+border-radius: 10px;
+
+
+a{
+    display: block;
+}
+
+`;
+
+
 
 // interface 
 interface RouteParams {
@@ -118,6 +146,8 @@ interface IPriceData {
         };
     };
 }
+
+
 function Coin() {
     const { coinId } = useParams<RouteParams>();
     const [loading, setLoading] = useState(true);
@@ -137,44 +167,70 @@ function Coin() {
         }
         )();
     }, [coinId]);
+
     return (
         <Container>
             <Header>
-                <Title>{state?.name ? state.name : loading ? "Loading..." : info?.name} </ Title>
+                <Title>
+                    <Link to={"/"}>
+                        {
+                            state?.name ? state.name : loading ? "Loading..." : info?.name
+                        }
+                    </Link>
+                </ Title>
             </Header>
             {loading ? (<Loader>Loading...</Loader>) :
-                (<>
-                    <Overview>
-                        <OverviewItem>
-                            <span>Rank:</span>
-                            <span>{info?.rank}</span>
-                        </OverviewItem>
+                (
+                    <>
+                        <Overview>
+                            <OverviewItem>
+                                <span>Rank:</span>
+                                <span>{info?.rank}</span>
+                            </OverviewItem>
 
-                        <OverviewItem>
-                            <span>SYMBOL:</span>
-                            <span>{info?.symbol}</span>
-                        </OverviewItem>
+                            <OverviewItem>
+                                <span>SYMBOL:</span>
+                                <span>{info?.symbol}</span>
+                            </OverviewItem>
 
-                        <OverviewItem>
-                            <span>OPEN SOURCE:</span>
-                            <span>{info?.open_source ? "Yes" : "NO"}</span>
-                        </OverviewItem>
-                    </Overview>
+                            <OverviewItem>
+                                <span>OPEN SOURCE:</span>
+                                <span>{info?.open_source ? "Yes" : "NO"}</span>
+                            </OverviewItem>
+                        </Overview>
 
-                    <Description>{info?.description}</Description>
+                        <Description>{info?.description}</Description>
 
-                    <Overview>
-                        <OverviewItem>
-                            <span>TOTAL SUPLY:</span>
-                            <span>{priceInfo?.total_supply}</span>
-                        </OverviewItem>
+                        <Overview>
+                            <OverviewItem>
+                                <span>TOTAL SUPLY:</span>
+                                <span>{priceInfo?.total_supply}</span>
+                            </OverviewItem>
 
-                        <OverviewItem>
-                            <span>MAX SUPLY:</span>
-                            <span>{priceInfo?.max_supply}</span>
-                        </OverviewItem>
-                    </Overview>
-                </>)
+                            <OverviewItem>
+                                <span>MAX SUPLY:</span>
+                                <span>{priceInfo?.max_supply}</span>
+                            </OverviewItem>
+                        </Overview>
+
+                        <Taps>
+                            <Tap>
+                                <Link to={`/${coinId}/price`}>Price</Link>
+                            </Tap>
+                            <Tap>
+                                <Link to={`/${coinId}/chart`}>Chart</Link>
+                            </Tap>
+                        </Taps>
+                        <Switch>
+                            <Route path={`/${coinId}/price`}>
+                                <Price />
+                            </Route>
+                            <Route path={`/${coinId}/chart`}>
+                                <Chart />
+                            </Route>
+                        </Switch>
+                    </>
+                )
             }
         </Container>
     );
