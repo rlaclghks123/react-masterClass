@@ -66,19 +66,17 @@ const Taps = styled.div`
 `;
 
 
-const Tap = styled.span`
+const Tap = styled.span<{ isActive: boolean }>`
 text-align: center;
 text-transform: uppercase;
 background-color: white;
 padding: 7px 0px;
 font-size: 12px;
 border-radius: 10px;
-
-
+color:${props => props.isActive ? props.theme.accentColor : props.theme.textColor};
 a{
     display: block;
 }
-
 `;
 
 
@@ -154,7 +152,8 @@ function Coin() {
     const { state } = useLocation<RouteState>();
     const [info, setInfo] = useState<IInfoData>();
     const [priceInfo, setPriceInfo] = useState<IPriceData>();
-
+    const priceMathch = useRouteMatch(`/${coinId}/price`);
+    const chartMathch = useRouteMatch(`/${coinId}/chart`);
     useEffect(() => {
         (async () => {
             const coinInfo = await (await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)).json();
@@ -214,10 +213,10 @@ function Coin() {
                         </Overview>
 
                         <Taps>
-                            <Tap>
+                            <Tap isActive={priceMathch !== null}>
                                 <Link to={`/${coinId}/price`}>Price</Link>
                             </Tap>
-                            <Tap>
+                            <Tap isActive={chartMathch !== null}>
                                 <Link to={`/${coinId}/chart`}>Chart</Link>
                             </Tap>
                         </Taps>
