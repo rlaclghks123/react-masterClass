@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router";
 import styled from "styled-components";
 
+
+//style component
 const Title = styled.h1`
     color:${(props) => props.theme.accentColor};
     font-weight:700;
@@ -28,6 +30,32 @@ const Loader = styled.div`
     color:black;
     `;
 
+const Overview = styled.div`
+    display:flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+
+`;
+
+
+const OverviewItem = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ 
+    span:first-child {
+        font-size: 10px;
+        font-weight: 400;
+        margin-bottom: 5px;
+  }
+`;
+
+const Description = styled.p`
+    margin: 20px 0px`;
+
+// interface 
 interface RouteParams {
     coinId: string;
 }
@@ -105,16 +133,49 @@ function Coin() {
             // console.log(coinPriceInfo);
             setInfo(coinInfo);
             setPriceInfo(coinPriceInfo);
+            setLoading(false);
         }
         )();
-    }, []);
+    }, [coinId]);
     return (
         <Container>
             <Header>
-                <Title>{state?.name || "Loading..."} </ Title>
+                <Title>{state?.name ? state.name : loading ? "Loading..." : info?.name} </ Title>
             </Header>
-            {loading ? <Loader>Loading...</Loader> :
-                null}
+            {loading ? (<Loader>Loading...</Loader>) :
+                (<>
+                    <Overview>
+                        <OverviewItem>
+                            <span>Rank:</span>
+                            <span>{info?.rank}</span>
+                        </OverviewItem>
+
+                        <OverviewItem>
+                            <span>SYMBOL:</span>
+                            <span>{info?.symbol}</span>
+                        </OverviewItem>
+
+                        <OverviewItem>
+                            <span>OPEN SOURCE:</span>
+                            <span>{info?.open_source ? "Yes" : "NO"}</span>
+                        </OverviewItem>
+                    </Overview>
+
+                    <Description>{info?.description}</Description>
+
+                    <Overview>
+                        <OverviewItem>
+                            <span>TOTAL SUPLY:</span>
+                            <span>{priceInfo?.total_supply}</span>
+                        </OverviewItem>
+
+                        <OverviewItem>
+                            <span>MAX SUPLY:</span>
+                            <span>{priceInfo?.max_supply}</span>
+                        </OverviewItem>
+                    </Overview>
+                </>)
+            }
         </Container>
     );
 }
