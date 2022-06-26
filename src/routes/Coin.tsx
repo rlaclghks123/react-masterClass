@@ -72,6 +72,7 @@ text-transform: uppercase;
 background-color: white;
 padding: 7px 0px;
 font-size: 12px;
+font-weight: 700;
 border-radius: 10px;
 color:${props => props.isActive ? props.theme.accentColor : props.theme.textColor};
 a{
@@ -147,19 +148,25 @@ interface IPriceData {
 
 
 function Coin() {
+
+    //state
     const { coinId } = useParams<RouteParams>();
     const [loading, setLoading] = useState(true);
     const { state } = useLocation<RouteState>();
     const [info, setInfo] = useState<IInfoData>();
     const [priceInfo, setPriceInfo] = useState<IPriceData>();
+
+    //routeMatch
     const priceMathch = useRouteMatch(`/${coinId}/price`);
     const chartMathch = useRouteMatch(`/${coinId}/chart`);
+
+    //useEffect
     useEffect(() => {
         (async () => {
             const coinInfo = await (await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)).json();
             const coinPriceInfo = await (await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)).json();
-            // console.log(coinInfo);
-            // console.log(coinPriceInfo);
+            //console.log(coinInfo);
+            /* console.log(coinPriceInfo); */
             setInfo(coinInfo);
             setPriceInfo(coinPriceInfo);
             setLoading(false);
@@ -220,6 +227,7 @@ function Coin() {
                                 <Link to={`/${coinId}/chart`}>Chart</Link>
                             </Tap>
                         </Taps>
+
                         <Switch>
                             <Route path={`/${coinId}/price`}>
                                 <Price />
