@@ -5,6 +5,9 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 import Chart from "./Chart";
 import Price from "./Price";
 import { Link } from "react-router-dom";
+import { useQuery } from "react-query";
+import { fetchCoinInfo, fetchCoinPrice } from "../api";
+
 //style component
 const Title = styled.h1`
     color:${(props) => props.theme.accentColor};
@@ -149,30 +152,18 @@ interface IPriceData {
 
 function Coin() {
 
-    //state
+
     const { coinId } = useParams<RouteParams>();
-    const [loading, setLoading] = useState(true);
     const { state } = useLocation<RouteState>();
-    const [info, setInfo] = useState<IInfoData>();
-    const [priceInfo, setPriceInfo] = useState<IPriceData>();
 
     //routeMatch
     const priceMathch = useRouteMatch(`/${coinId}/price`);
     const chartMathch = useRouteMatch(`/${coinId}/chart`);
 
-    //useEffect
-    useEffect(() => {
-        (async () => {
-            const coinInfo = await (await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)).json();
-            const coinPriceInfo = await (await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)).json();
-            //console.log(coinInfo);
-            /* console.log(coinPriceInfo); */
-            setInfo(coinInfo);
-            setPriceInfo(coinPriceInfo);
-            setLoading(false);
-        }
-        )();
-    }, [coinId]);
+    const { isLoading: infoLoadding, data: infoData } = useQuery(["info", coinId], () => fetchCoinInfo(coinId));
+    const { isLoading: priceLoading, data: priceData } = useQuery(["price, coinId"], () => fetchCoinPrice(coinId));
+
+    const loading = infoLoadding || priceLoading;
 
     return (
         <Container>
@@ -180,7 +171,7 @@ function Coin() {
                 <Title>
                     <Link to={"/"}>
                         {
-                            state?.name ? state.name : loading ? "Loading..." : info?.name
+                            state?.name ? state.name : loading ? "Loading..." : infoData?.name
                         }
                     </Link>
                 </ Title>
@@ -191,31 +182,31 @@ function Coin() {
                         <Overview>
                             <OverviewItem>
                                 <span>Rank:</span>
-                                <span>{info?.rank}</span>
+                                <span>{infoData?.rank}</span>
                             </OverviewItem>
 
                             <OverviewItem>
                                 <span>SYMBOL:</span>
-                                <span>{info?.symbol}</span>
+                                <span>{infoData?.symbol}</span>
                             </OverviewItem>
 
                             <OverviewItem>
                                 <span>OPEN SOURCE:</span>
-                                <span>{info?.open_source ? "Yes" : "NO"}</span>
+                                <span>{infoData?.open_source ? "Yes" : "NO"}</span>
                             </OverviewItem>
                         </Overview>
 
-                        <Description>{info?.description}</Description>
+                        <Description>{infoData?.description}</Description>
 
                         <Overview>
                             <OverviewItem>
                                 <span>TOTAL SUPLY:</span>
-                                <span>{priceInfo?.total_supply}</span>
+                                <span>{priceData?.total_supply}</span>
                             </OverviewItem>
 
                             <OverviewItem>
                                 <span>MAX SUPLY:</span>
-                                <span>{priceInfo?.max_supply}</span>
+                                <span>{priceData?.max_supply}</span>
                             </OverviewItem>
                         </Overview>
 
