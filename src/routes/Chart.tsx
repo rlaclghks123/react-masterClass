@@ -28,7 +28,29 @@ function Chart({ coinId }: ChartProps) {
                 data: data?.map((price) => price.close) ?? [],
             },
         ]}
+        options={
+            {
 
+                chart: {
+                    width: 500,
+                    height: 500,
+                    toolbar: { show: false },
+                },
+                grid: {
+                    show: false,
+                },
+                xaxis: {
+                    labels: { show: false },
+                },
+                yaxis: {
+                    show: false,
+                },
+                stroke: {
+                    curve: "smooth",
+                    width: 3,
+                },
+            }
+        }
     />)}</div>
 }
 
