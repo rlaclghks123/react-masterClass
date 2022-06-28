@@ -7,7 +7,7 @@ import Price from "./Price";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoinPrice } from "../api";
-import { Helmet } from "react-helmet";
+import { HelmetProvider } from "react-helmet-async";
 
 //style component
 const Title = styled.h1`
@@ -116,7 +116,7 @@ interface IInfoData {
     last_data_at: string;
 }
 
-interface IPriceData {
+export interface IPriceData {
     id: string;
     name: string;
     symbol: string;
@@ -162,15 +162,16 @@ function Coin() {
     const chartMathch = useRouteMatch(`/${coinId}/chart`);
 
     const { isLoading: infoLoadding, data: infoData } = useQuery<IInfoData>(["info", coinId], () => fetchCoinInfo(coinId));
-    const { isLoading: priceLoading, data: priceData } = useQuery<IPriceData>(["price, coinId"], () => fetchCoinPrice(coinId), { refetchInterval: 5000 });
+    const { isLoading: priceLoading, data: priceData } = useQuery<IPriceData>(["price", coinId], () => fetchCoinPrice(coinId), { refetchInterval: 5000 });
 
     const loading = infoLoadding || priceLoading;
 
+
     return (
         <Container>
-            <Helmet>
+            <HelmetProvider>
                 <title> {state?.name ? state.name : loading ? "Loading..." : infoData?.name} </title>
-            </Helmet>
+            </HelmetProvider>
             <Header>
                 <Title>
                     <Link to={"/"}>
@@ -225,7 +226,7 @@ function Coin() {
 
                         <Switch>
                             <Route path={`/${coinId}/price`}>
-                                <Price />
+                                <Price coinId={coinId} />
                             </Route>
                             <Route path={`/${coinId}/chart`}>
                                 <Chart coinId={coinId} />

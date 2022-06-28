@@ -3,7 +3,8 @@ import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoins } from "../api";
-import { Helmet } from "react-helmet";
+import Price from "./Price";
+import { HelmetProvider } from "react-helmet-async";
 const Title = styled.h1`
     color:${(props) => props.theme.accentColor};
     font-weight:700;
@@ -71,9 +72,9 @@ function Coins() {
 
     return (
         <Container>
-            <Helmet><title>Coins</title></Helmet>
+            <HelmetProvider><title>Coins</title></HelmetProvider>
             <Header>
-                <Title> 코인</ Title>
+                <Title> Coins </ Title>
             </Header>
             {isLoading ? <Loader>Loading...</Loader> :
                 <CoinList>
