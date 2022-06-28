@@ -30,7 +30,6 @@ function Chart({ coinId }: ChartProps) {
         ]}
         options={
             {
-
                 chart: {
                     width: 500,
                     height: 500,
@@ -40,7 +39,11 @@ function Chart({ coinId }: ChartProps) {
                     show: false,
                 },
                 xaxis: {
+                    axisBorder: { show: false },
+                    axisTicks: { show: false },
                     labels: { show: false },
+                    type: "datetime",
+                    categories: data?.map((price) => price.time_close),
                 },
                 yaxis: {
                     show: false,
@@ -48,6 +51,16 @@ function Chart({ coinId }: ChartProps) {
                 stroke: {
                     curve: "smooth",
                     width: 3,
+                },
+                fill: {
+                    type: "gradient",
+                    gradient: { gradientToColors: ["#0be881"], stops: [0, 100] },
+                },
+                colors: ["#0fbcf9"],
+                tooltip: {
+                    y: {
+                        formatter: (value) => `$${value.toFixed(2)}`,
+                    },
                 },
             }
         }
