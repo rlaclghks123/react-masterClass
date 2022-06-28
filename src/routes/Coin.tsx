@@ -7,6 +7,7 @@ import Price from "./Price";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoinPrice } from "../api";
+import { Helmet } from "react-helmet";
 
 //style component
 const Title = styled.h1`
@@ -167,6 +168,9 @@ function Coin() {
 
     return (
         <Container>
+            <Helmet>
+                <title> {state?.name ? state.name : loading ? "Loading..." : infoData?.name} </title>
+            </Helmet>
             <Header>
                 <Title>
                     <Link to={"/"}>
