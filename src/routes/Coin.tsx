@@ -161,7 +161,7 @@ function Coin() {
     const chartMathch = useRouteMatch(`/${coinId}/chart`);
 
     const { isLoading: infoLoadding, data: infoData } = useQuery<IInfoData>(["info", coinId], () => fetchCoinInfo(coinId));
-    const { isLoading: priceLoading, data: priceData } = useQuery<IPriceData>(["price, coinId"], () => fetchCoinPrice(coinId));
+    const { isLoading: priceLoading, data: priceData } = useQuery<IPriceData>(["price, coinId"], () => fetchCoinPrice(coinId), { refetchInterval: 5000 });
 
     const loading = infoLoadding || priceLoading;
 
@@ -191,8 +191,8 @@ function Coin() {
                             </OverviewItem>
 
                             <OverviewItem>
-                                <span>OPEN SOURCE:</span>
-                                <span>{infoData?.open_source ? "Yes" : "NO"}</span>
+                                <span>Price:</span>
+                                <span>{priceData?.quotes.USD.ath_price.toFixed(3)}</span>
                             </OverviewItem>
                         </Overview>
 
