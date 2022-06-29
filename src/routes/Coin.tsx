@@ -60,7 +60,7 @@ const OverviewItem = styled.div`
 
 const Description = styled.p`
     margin: 20px 0px;
-    color:${props => props.theme.textColor};
+    color:${props => props.theme.pColor};
     `;
 
 

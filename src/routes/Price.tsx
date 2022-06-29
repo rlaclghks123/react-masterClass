@@ -69,7 +69,6 @@ display: flex;
 justify-content: center;
 align-items: center;
 width:37%;
-margin-right: 10px;
 height:100%;
 font-size: 12px;
 `;
