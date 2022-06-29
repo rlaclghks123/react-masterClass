@@ -64,8 +64,7 @@ const OverviewItem = styled.div`
 `;
 
 const ItemName = styled.div`
-background-color: ${prop => prop.theme.bgColor};
-color:white;
+color:black;
 display: flex;
 justify-content: center;
 align-items: center;

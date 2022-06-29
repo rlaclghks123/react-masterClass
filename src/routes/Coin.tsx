@@ -59,7 +59,10 @@ const OverviewItem = styled.div`
 `;
 
 const Description = styled.p`
-    margin: 20px 0px`;
+    margin: 20px 0px;
+    color:${props => props.theme.textColor};
+    `;
+
 
 
 const Taps = styled.div`
@@ -67,14 +70,15 @@ const Taps = styled.div`
     grid-template-columns: 1fr 1fr;
     margin: 25px 0px;
     gap:10px;
-    background-color: ${prop => prop.theme.bgColor};
+    background-color: white;
+    border-radius: 10px;
 `;
 
 
 const Tap = styled.span<{ isActive: boolean }>`
 text-align: center;
 text-transform: uppercase;
-background-color: ${prop => prop.theme.bgColor};
+background-color: white;
 padding: 7px 0px;
 font-size: 12px;
 font-weight: 700;
