@@ -51,6 +51,7 @@ const Overview = styled.div`
     border-radius: 10px;
     margin-bottom: 10px;
     height: 100px;
+    background-color: white;
 `;
 
 
@@ -59,10 +60,12 @@ const OverviewItem = styled.div`
     border-bottom:  0.1px solid rgba(0,0,0,0.2);;
     display: flex;
     align-items: center;
+    background-color: white;
 `;
 
 const ItemName = styled.div`
 background-color: ${prop => prop.theme.bgColor};
+color:white;
 display: flex;
 justify-content: center;
 align-items: center;

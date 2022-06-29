@@ -42,7 +42,7 @@ const Overview = styled.div`
     background-color: white;
     padding: 10px 20px;
     border-radius: 10px;
-
+    background-color:white;
 `;
 
 
@@ -50,7 +50,7 @@ const OverviewItem = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
- 
+    background-color:white;
     span:first-child {
         font-size: 10px;
         font-weight: 400;
@@ -67,13 +67,14 @@ const Taps = styled.div`
     grid-template-columns: 1fr 1fr;
     margin: 25px 0px;
     gap:10px;
+    background-color: ${prop => prop.theme.bgColor};
 `;
 
 
 const Tap = styled.span<{ isActive: boolean }>`
 text-align: center;
 text-transform: uppercase;
-background-color: white;
+background-color: ${prop => prop.theme.bgColor};
 padding: 7px 0px;
 font-size: 12px;
 font-weight: 700;

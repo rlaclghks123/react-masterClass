@@ -30,6 +30,7 @@ const Coin = styled.li`
 background-color: white;
 margin: 20px 0px;
 padding: 20px;
+color:${props => props.theme.textColor};
 a{
     padding: 20px;
     display: flex;
