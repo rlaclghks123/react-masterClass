@@ -7,64 +7,61 @@ interface ChartProps {
 }
 
 interface IHistorycal {
-    time_open: string,
-    time_close: string,
-    open: number,
-    high: number,
-    low: number,
-    close: number,
-    volume: number,
+    time_open: number,
+    time_close: number,
+    open: string,
+    high: string,
+    low: string,
+    close: string,
+    volume: string,
     market_cap: number,
 }
 
 
+
 function Chart({ coinId }: ChartProps) {
     const { isLoading, data } = useQuery<IHistorycal[]>(["ohlcv", coinId], () => fetchCoinHistory(coinId));
+    console.log(data);
+    return <div>{isLoading ? ("Loading...") : (
+        <ApexChart type="candlestick"
+            series={[
+                {
+                    data: data?.map((price) => {
 
-    return <div>{isLoading ? ("Loading...") : (<ApexChart type="line"
-        series={[
-            {
-                name: "Price",
-                data: data?.map((price) => price.close) ?? [],
-            },
-        ]}
-        options={
-            {
-                chart: {
-                    width: 500,
-                    height: 500,
-                    toolbar: { show: false },
-                },
-                grid: {
-                    show: false,
-                },
-                xaxis: {
-                    axisBorder: { show: false },
-                    axisTicks: { show: false },
-                    labels: { show: false },
-                    type: "datetime",
-                    categories: data?.map((price) => price.time_close),
-                },
-                yaxis: {
-                    show: false,
-                },
-                stroke: {
-                    curve: "smooth",
-                    width: 3,
-                },
-                fill: {
-                    type: "gradient",
-                    gradient: { gradientToColors: ["#0be881"], stops: [0, 100] },
-                },
-                colors: ["#0fbcf9"],
-                tooltip: {
-                    y: {
-                        formatter: (value) => `$${value.toFixed(2)}`,
+                        return {
+                            x: price.time_open,
+                            y: [price.open, price.high, price.low, price.close]
+                        }
+                    })
+                } as any
+            ]}
+
+            options={
+                {
+                    chart: {
+                        type: 'candlestick',
+                        height: 350,
+                        width: 200,
+                        toolbar: {
+                            show: false
+                        }
                     },
-                },
+                    title: {
+                        text: 'CandleStick Chart',
+                        align: 'left'
+                    },
+                    xaxis: {
+                        type: 'datetime'
+                    },
+                    yaxis: {
+                        tooltip: {
+                            enabled: true
+                        }
+                    }
+                }
             }
-        }
-    />)}</div>
+        />)
+    }</div>
 }
 
 export default Chart
