@@ -3,19 +3,18 @@ import Coin from "./routes/Coin";
 import Coins from "./routes/Coins";
 
 interface IRouterProps {
-    toggleMode: () => void;
-    isDark: boolean;
+
 }
 
-function Router({ toggleMode, isDark }: IRouterProps) {
+function Router({ }: IRouterProps) {
     return (
         <BrowserRouter>
             <Switch>
                 <Route path="/:coinId">
-                    <Coin isDark={isDark} />
+                    <Coin />
                 </Route>
                 <Route path="">
-                    <Coins toggleMode={toggleMode} />
+                    <Coins />
                 </Route>
             </Switch>
         </BrowserRouter>
