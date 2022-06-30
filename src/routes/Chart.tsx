@@ -17,9 +17,12 @@ interface IHistorycal {
     market_cap: number,
 }
 
+interface IChartProps {
+    isDark: boolean;
+    coinId: string;
+}
 
-
-function Chart({ coinId }: ChartProps) {
+function Chart({ coinId, isDark }: IChartProps) {
     const { isLoading, data } = useQuery<IHistorycal[]>(["ohlcv", coinId], () => fetchCoinHistory(coinId));
     console.log(data);
     return <div>{isLoading ? ("Loading...") : (
@@ -45,6 +48,9 @@ function Chart({ coinId }: ChartProps) {
                         toolbar: {
                             show: false
                         }
+                    },
+                    theme: {
+                        mode: isDark ? "dark" : "light"
                     },
                     title: {
                         text: 'CandleStick Chart',

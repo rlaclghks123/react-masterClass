@@ -65,9 +65,11 @@ interface ICoin {
     type: string,
 };
 
+interface ItoggleMode {
+    toggleMode: () => void;
+}
 
-
-function Coins() {
+function Coins({ toggleMode }: ItoggleMode) {
 
     const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
 
@@ -76,6 +78,7 @@ function Coins() {
             <HelmetProvider><title>Coins</title></HelmetProvider>
             <Header>
                 <Title> Coins </ Title>
+                <button onClick={toggleMode}>Mode</button>
             </Header>
             {isLoading ? <Loader>Loading...</Loader> :
                 <CoinList>
