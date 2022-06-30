@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoins } from "../api";
-import Price from "./Price";
 import { HelmetProvider } from "react-helmet-async";
+import { useSetRecoilState } from "recoil";
+import { isDarkAtom } from "../atoms";
+
 const Title = styled.h1`
     color:${(props) => props.theme.accentColor};
     font-weight:700;
@@ -71,6 +73,9 @@ interface ItoggleMode {
 
 function Coins({ }: ItoggleMode) {
 
+    const setDarkAtom = useSetRecoilState(isDarkAtom);
+    const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
+
     const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
 
     return (
@@ -78,6 +83,7 @@ function Coins({ }: ItoggleMode) {
             <HelmetProvider><title>Coins</title></HelmetProvider>
             <Header>
                 <Title> Coins </ Title>
+                <button onClick={toggleDarkAtom}>Toggle Mode</button>
             </Header>
             {isLoading ? <Loader>Loading...</Loader> :
                 <CoinList>
