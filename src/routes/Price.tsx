@@ -71,6 +71,7 @@ align-items: center;
 width:37%;
 height:100%;
 font-size: 12px;
+font-weight: 400;
 `;
 
 const ItemData = styled.div`
