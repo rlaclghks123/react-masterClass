@@ -71,9 +71,15 @@
 
       - interface : Object Shape(객체모양)을 TypeScript에게 설명해주는 TypeScript의 개념. 즉 Type을 지정한다.
 
-      - 사용방법  
-      기본형태:  interface interface이름 {object shape을 설명}. interface의 이름은 주로 Props를 붙혀서 이름 짓는다. Ex) CircleProps  
-      Ex) interface CircleProps{bgColor:string;}
+      -일반 컴포넌트 interface 사용방법  
+      기본형태:  interface interface이름 {object shape을 설명}. 
+      interface의 이름은 주로 Props를 붙혀서 이름 생성하거나 , I를 붙혀서 생성한다.. Ex) CircleProps, ICircle  Ex) interface CircleProps{bgColor:string;}
+
+      - style 컴포넌트 interface 사용방법  
+      기본형태:  const style컴포넌트이름  = styled.HTML tag <interface이름>`css코드`;
+      Ex)  const A = styled.div<AProps>`css코드`;
+
+
 
 - [x] Default props vs Optional props 차이점 
 
@@ -90,6 +96,43 @@
 
       -Type이 초기값과 달라질경우 :  const [value, setValue] = useState<number | string>() 이런식으로 사용 하면된다.  
 
-- [x] Event
+- [x] 웹사이트 구성 방식
 
-      - TypeScript에서 event 사용시 type지정은     
+      1. SPA : Single Page Application의 약자로서 호출된 HTML상에서 필요한 데이터를 호출하여 화면을 새로 구성해 주는 것으로 실제로 페이지의 이동이 일어나지 않는다. 처음 웹사이트 접속시 한번만 요청되고 페이지 이동시는 실제로 페이지를 이동하지 않고 웹사이트의 view 부분만 데이터를 받아서 render하기 때문에 속도가 빨라진다. 
+
+      2. SSR : Server Side Rendering의 약자로 서버로부터 완전하게 만들어진 html파일을 받아와 페이지 전체를 렌더링 하는 방식이다.
+      검색엔진 최적화에 유리하며, 초기로딩 시간이 빠르다(사용자가 기다리는 시간이 적어짐)
+      그러나 TTV(Time To View) 와 TTI(Time To Interact)간 시간차가 발생할 수 있으며, 서버측에 부하가 증가한다.
+  
+- [x] React Router
+
+      - Router
+            - 라우팅이란 사용자가 요청한 URL에 따라 해당 URL에 맞는 페이지를 보여주는것.
+            - React는 SPA방식으로  신규 페이지를 불러오지 않는 상황에서 각각의 url에 따라 선택된 데이터를 하나의 페이지에서 렌더링 해주는 라이브러리 라고 볼 수 있다.
+            - 사용자가 입력한 주소를 감지하는 역할을 하며 여러 환경에서 동작할 수 있도록 여러 종유의 라우터 컴포넌트를 제공하며 가장 많이 사용되는 라우터 컴포넌트는 BrowserRouter와 HashRouter이다.
+            - BrowerRouter : HTML5를 지원하는 주소를 감지하고, github pages에서 설정하기 복잡하다 (배포가 복잡)
+            - HashRouter : URL의 해시를 활용한 라우터 이며, 주소에 #이 붙기때문에 검색엔진으로 읽지 못한다. github pages에서 설정하기 간편하다(배포가 간편)
+
+      - switch, Route
+            - switch컴포넌트는 여러 Route를 감싸서 그 중 규칙이 일치하는 라우트 단 하나만을 렌더링 시켜주는 역할을 한다.  
+            - Route는 path속성에 경로, element속성에는 컴포넌트를 넣어 준다.
+      
+      - Link
+            - 웹 페이지에서는 원래 링크를 보여줄 때 a태그를 사용한다. 하지만 a태그는 클릭시 페이지를 새로 불러오기 때문에 사용하지 않는다.  - Link 컴포넌트를 사용하는데, 생김새는 a태그를 사용하지만, History API를 통해 브라우저 주소의 경로만 바꾸는 기능이 내장되어 있다.
+      
+      - 사용방법
+            - <BrowserRouter>
+                  <Switch>
+                  <Route path="/:coinId">
+                        <Coin />
+                  </Route>
+                  <Route path="">
+                        <Coins />
+                  </Route>
+                  </Switch>
+             </BrowserRouter>
+     
+            - <Link to={{
+                        pathname: `/${coin.id}`,
+                        state: { name: coin.name }}}>
+    
